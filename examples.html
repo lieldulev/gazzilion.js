@@ -1,0 +1,133 @@
+<!doctype html>
+<head>
+  <title>Gazzilion.js Examples</title>
+  <script src="gazzilion.js"></script>
+  <style>
+    body {
+      font-family: Arial, Tahoma, sans-serif;
+      font-size: 14px;
+    }
+    h1,h2{
+      margin-bottom:0px;
+      margin-top:6px;
+    }
+    p{
+      margin-top:0px;
+      margin-bottom: 6px;
+    }
+    table{
+      width: 100%;
+      border-spacing: 0;
+      margin-bottom: 24px;
+    }
+    th {
+      text-align:left;
+    }
+    tbody tr:nth-child(even) {background: #CCC}
+    tbody tr:nth-child(odd) {background: #EEE}
+  </style>
+</head>
+<body>
+  <h1>Gazzilion.js</h1>
+  <p>
+  Version <span id="gaz_ver"></span>, <a href="">available on Github</a> under the <a href="MIT-LICENSE.txt">MIT License</a>.
+  </p>
+  <p>
+  Gazzilion.js tries to solve the common problem of displaying the pretty or textual version for numbers.<br/>
+  Since it is in early stages <strong>expect API to break</strong>.
+  </p>
+  <p>&nbsp;</p>
+  <p>
+    <strong>API:</strong><br/>
+    <a href="#add_commas">add_commas</a><br/>
+    <a href="#to_letter">to_letter</a><br/>
+    <a href="#to_word">to_word</a><br/>
+    </p>
+  <p>&nbsp;</p>
+  <h2><a name='add_commas'>Gazzilion.add_commas</a></h2>
+  <p> Adds commas where needed.
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Original #
+        </th>
+        <th>
+          Javascript
+        </th>
+        <th>
+          Result
+        </th>
+      </tr>
+    </thead>
+    <tbody id="results_add_commas">
+    </tbody>
+  </table>
+  <h2><a name='to_letter'>Gazzilion.to_letter</a></h2>
+  <p> Converts to the <em>round</em> short letter form (1K, 1M, 1B).
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Original #
+        </th>
+        <th>
+          Javascript
+        </th>
+        <th>
+          Result
+        </th>
+      </tr>
+    </thead>
+    <tbody id="results_to_letter">
+    </tbody>
+  </table>
+  <h2><a name='to_word'>Gazzilion.to_word</a></h2>
+  <p> Converts to the <em>round</em> word form (1 thousand, 1 million, 1 billion).
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Original #
+        </th>
+        <th>
+          Javascript
+        </th>
+        <th>
+          Result
+        </th>
+      </tr>
+    </thead>
+    <tbody id="results_to_word">
+    </tbody>
+  </table>
+  <script>
+    var g_version = document.getElementById('gaz_ver');
+    g_version.innerHTML = Gazzilion.VERSION;
+    var numbers = [13.2,102,1373,1024.1234,6751,120499,120500,1000000,2911111,123456789,10900000000,123456789123456];
+    
+    var results = document.getElementById('results_add_commas');
+    for(var i=0;i < numbers.length; i++){
+      var row = document.createElement('tr');
+      number = numbers[i];
+      row.innerHTML = '<td>'+number+'</td><td><code>Gazzlion.add_commas('+number+')</code></td><td>'+Gazzilion.add_commas(number)+'</td>';
+      results.appendChild(row);
+    }
+    
+    var results = document.getElementById('results_to_letter');
+    for(var i=0;i < numbers.length; i++){
+      var row = document.createElement('tr');
+      number = numbers[i];
+      row.innerHTML = '<td>'+number+'</td><td><code>Gazzlion.to_letter('+number+')</code></td><td>'+Gazzilion.to_letter(number)+'</td>';
+      results.appendChild(row);
+    }
+    
+    var results = document.getElementById('results_to_word');
+    for(var i=0;i < numbers.length; i++){
+      var row = document.createElement('tr');
+      number = numbers[i];
+      row.innerHTML = '<td>'+number+'</td><td><code>Gazzlion.to_word('+number+')</code></td><td>'+Gazzilion.to_word(number)+'</td>';
+      results.appendChild(row);
+    }
+  </script>
+</body>
