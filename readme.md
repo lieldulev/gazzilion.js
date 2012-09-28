@@ -4,13 +4,13 @@
 
 **Important**: Since development is in early stages **expect API to break**.
 
-## What
-
-It takes numbers in javascript like 21013 and converts them to human readable strings for display like: 
+It takes numbers in javascript like ```21013``` and converts them to human readable strings for display like: 
 
 * 21,013 
 * 21K
 * 21 thousand
+
+It (properly!) extends the built-in Number object - making it easy to use.
 
 ## Works everywhere
 
