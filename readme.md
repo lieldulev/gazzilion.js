@@ -25,10 +25,11 @@ Old node.js, new node.js and all browsers.
 ## API
 
     Gazzilion.add_commas(21013); // "21,013"
-    Gazzilion.to_letter(315098123); // "315M"
-    Gazzillion.to_word(8135432967); // "8 billion"
+    Gazzilion.M(315098123); // "315M"
+    my_number = 8135432967;
+    my_number.to_word(); // "8 billion"
 
-More examples  available in [here](http://lieldulev.github.com/gazzilion.js/ "Gazzilion.js") or in `examples.html`.
+Full API is available in [here](http://lieldulev.github.com/gazzilion.js/ "Gazzilion.js").
 
 ## Copyright
 2012 © Liel Dulev

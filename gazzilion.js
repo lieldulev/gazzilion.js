@@ -6,9 +6,17 @@
   var root = this;
 
   // Create a safe reference to the Gazzilion object for use below.
+  // Accept number in construct (i.e. Gazzilion(3456) ) and use it as
+  // base number
   var Gazzilion = function(obj) {
-    if (obj instanceof Gazzilion) return obj;
-    if (!(this instanceof Gazzilion)) return new Gazzilion(obj);
+    if (obj instanceof Gazzilion){
+      return obj;
+    }
+    if (!(this instanceof Gazzilion)) {
+      Gazzilion._number = obj.toString();
+      return Gazzilion;
+    }
+   
   };
 
   // Export the Gazzilion object for **Node.js**, with
@@ -19,35 +27,54 @@
     if (typeof module !== 'undefined' && module.exports) {
       exports = module.exports = Gazzilion;
     }
-    exports.Gazzilion = Gazzilion;
+    exports.Gazzilion = exports._n = Gazzilion;
   } else {
     root['Gazzilion'] = Gazzilion;
   }
 
   // Current version.
-  Gazzilion.VERSION = '0.1.2';
+  Gazzilion.VERSION = '0.1.3';
 
   // helper functions
   var divide_and_concat = function(number, devider, round, concat){
+    var number = typeof number !== 'undefined' ? number : this.toString();
     var number = Gazzilion.add_commas(number / devider, round);
-    return parseFloat(number) == 0 ? '0' : number +' '+ concat;
+    return parseFloat(number) == 0 ? '0' : number + concat;
   }
 
+  var args_parser = function(object, args){
+    result = {number: 0, round: 0}
+    if (object instanceof Number) {
+      result.round = args.length > 0 ? args[0] : 0;
+      result.number = object.toString();
+    } else {
+      result.number = args.length > 0 ? args[0] : object.toString();
+      result.round = args.length > 1 && typeof args[1] !== 'undefined' ? args[1] : 0;
+    }
+    return result;
+  }
+
+  Gazzilion.toString = function(){
+    return Gazzilion._number.toString();
+  }
   // Public methods
   
-  Gazzilion.round = function(number, round) {
-    var round = typeof round !== 'undefined' ? round : 0;
+  Number.prototype.round = Gazzilion.round = function() {
+    var args = args_parser(this, arguments), number = args.number, round = args.round;
+
     number = parseFloat(number)+'';
     if (round == 0) {
-      return Math.round(number);
+      Gazzilion._number = Math.round(number);
+    } else {      
+      x = number.split('.');
+      Gazzilion._number= (x.length > 1) ? ((parseInt(x[1].substring(0, round)) !== 0) ? x[0] + '.' + x[1].substring(0,round) : x[0]) : x[0];
     }
-    x = number.split('.');
-    return (x.length > 1) ? ((parseInt(x[1]) !== 0) ? x[0] + '.' + x[1].substring(0,round) : x[0]) : x[0];
+    return Gazzilion;
   }
   
-  Gazzilion.add_commas = function(number, round)
-  {
-    var number = Gazzilion.round(number, round)+'';
+  Number.prototype.add_commas = Gazzilion.add_commas = function() {
+    var args = args_parser(this, arguments), number = args.number, round = args.round;
+    number = Gazzilion.round(number, round)+'';
     x = number.split('.');
     x1 = x[0];
     x2 = x.length > 1 ? '.' + x[1] : '';
@@ -59,7 +86,8 @@
   }
 
   // Return 4K, 10K, 230M, 2B formatted number 
-  Gazzilion.to_letter = function(number, round) {
+  Number.prototype.to_letter = Gazzilion.to_letter = function(number, round) {
+    var args = args_parser(this, arguments), number = args.number, round = args.round;
     if(number < 1000) {
       return Gazzilion.add_commas(number, round);
     } else if (number < 1000000) {
@@ -74,7 +102,8 @@
   }
 
   // Return 10 thousand, 1 Million, 23 Billion formatted number 
-  Gazzilion.to_word = function(number, round) {
+  Number.prototype.to_word = Gazzilion.to_word = function(number, round) {
+    var args = args_parser(this, arguments), number = args.number, round = args.round;
     if(number < 1000) {
       return Gazzilion.add_commas(number, round);
     } else if (number < 1000000) {
@@ -88,29 +117,33 @@
     }
   }
   
-  Gazzilion.thousand = function(number, round) {
-    return divide_and_concat(number, 1000, round, 'thousand');
+  Number.prototype.thousand = Gazzilion.thousand = function(number, round) {
+    var args = args_parser(this, arguments), number = args.number, round = args.round;
+    return divide_and_concat(number, 1000, round, ' thousand');
   }
 
-  Gazzilion.million = function(number, round) {
-    return divide_and_concat(number, 1000000, round, 'million');
+  Number.prototype.million = Gazzilion.million = function(number, round) {
+    var args = args_parser(this, arguments), number = args.number, round = args.round;
+    return divide_and_concat(number, 1000000, round, ' million');
   }
 
-  Gazzilion.billion = function(number, round) {
-    return divide_and_concat(number, 1000000000, round, 'billion');
+  Number.prototype.billion = Gazzilion.billion = function(number, round) {
+    var args = args_parser(this, arguments), number = args.number, round = args.round;
+    return divide_and_concat(number, 1000000000, round, ' billion');
   }
 
-  Gazzilion.K = function(number, round) {
+  Number.prototype.K = Gazzilion.K = function(number, round) {
+    var args = args_parser(this, arguments), number = args.number, round = args.round;
     return divide_and_concat(number, 1000, round, 'K');
   }
 
-  Gazzilion.M = function(number, round) {
+  Number.prototype.M = Gazzilion.M = function(number, round) {
+    var args = args_parser(this, arguments), number = args.number, round = args.round;
     return divide_and_concat(number, 1000000, round, 'M');
   }
 
-  Gazzilion.B = function(number, round) {
+  Number.prototype.B = Gazzilion.B = function(number, round) {
+    var args = args_parser(this, arguments), number = args.number, round = args.round;
     return divide_and_concat(number, 1000000000, round, 'B');
   }
-
-
 }).call(this);
