@@ -25,15 +25,30 @@
   }
 
   // Current version.
-  Gazzilion.VERSION = '0.1.1';
+  Gazzilion.VERSION = '0.1.2';
 
+  // helper functions
+  var divide_and_concat = function(number, devider, round, concat){
+    var number = Gazzilion.add_commas(number / devider, round);
+    return parseFloat(number) == 0 ? '0' : number +' '+ concat;
+  }
 
   // Public methods
   
-  Gazzilion.add_commas = function(nStr)
+  Gazzilion.round = function(number, round) {
+    var round = typeof round !== 'undefined' ? round : 0;
+    number = parseFloat(number)+'';
+    if (round == 0) {
+      return Math.round(number);
+    }
+    x = number.split('.');
+    return (x.length > 1) ? ((parseInt(x[1]) !== 0) ? x[0] + '.' + x[1].substring(0,round) : x[0]) : x[0];
+  }
+  
+  Gazzilion.add_commas = function(number, round)
   {
-    nStr += '';
-    x = nStr.split('.');
+    var number = Gazzilion.round(number, round)+'';
+    x = number.split('.');
     x1 = x[0];
     x2 = x.length > 1 ? '.' + x[1] : '';
     var rgx = /(\d+)(\d{3})/;
@@ -44,34 +59,58 @@
   }
 
   // Return 4K, 10K, 230M, 2B formatted number 
-  Gazzilion.to_letter = function(number) {
+  Gazzilion.to_letter = function(number, round) {
     if(number < 1000) {
-      return Math.round(number);
+      return Gazzilion.add_commas(number, round);
     } else if (number < 1000000) {
-      return Math.round(number / 1000) + 'K'
+      return Gazzilion.K(number, round);      
     } else if (number < 1000000000) {
-      return Math.round(number / 1000000) + 'M'
+      return Gazzilion.M(number, round);      
     } else if (number < 1000000000000) {
-      return Math.round(number / 1000000000) + 'B'
+      return Gazzilion.B(number, round);
     } else {
       return 'gazzilion';
     }
   }
 
   // Return 10 thousand, 1 Million, 23 Billion formatted number 
-  Gazzilion.to_word = function(number) {
+  Gazzilion.to_word = function(number, round) {
     if(number < 1000) {
-      return Gazzilion.add_commas(Math.round(number));
+      return Gazzilion.add_commas(number, round);
     } else if (number < 1000000) {
-      return Math.round(number / 1000) + ' thousand'
+      return Gazzilion.thousand(number, round);      
     } else if (number < 1000000000) {
-      return Math.round(number / 1000000) + ' million'
+      return Gazzilion.million(number, round);
     } else if (number < 1000000000000) {
-      return Math.round(number / 1000000000) + ' billion'
+      return Gazzilion.billion(number, round);
     } else {
       return 'gazzilion';
     }
   }
   
+  Gazzilion.thousand = function(number, round) {
+    return divide_and_concat(number, 1000, round, 'thousand');
+  }
+
+  Gazzilion.million = function(number, round) {
+    return divide_and_concat(number, 1000000, round, 'million');
+  }
+
+  Gazzilion.billion = function(number, round) {
+    return divide_and_concat(number, 1000000000, round, 'billion');
+  }
+
+  Gazzilion.K = function(number, round) {
+    return divide_and_concat(number, 1000, round, 'K');
+  }
+
+  Gazzilion.M = function(number, round) {
+    return divide_and_concat(number, 1000000, round, 'M');
+  }
+
+  Gazzilion.B = function(number, round) {
+    return divide_and_concat(number, 1000000000, round, 'B');
+  }
+
 
 }).call(this);
