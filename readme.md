@@ -1,6 +1,6 @@
 # Gazzilion.js
 
-Gazzilion.js tries to solve the common problem of displaying the pretty or textual version for numbers.
+[Gazzilion.js](http://lieldulev.github.com/gazzilion.js/ "Gazzilion.js") tries to solve the common problem of displaying the pretty or textual version for numbers.
 
 **Important**: Since development is in early stages **expect API to break**.
 
@@ -28,7 +28,7 @@ Old node.js, new node.js and all browsers.
     Gazzilion.to_letter(315098123); // "315M"
     Gazzillion.to_word(8135432967); // "8 billion"
 
-More examples  available in `examples.html` .
+More examples  available in [here](http://lieldulev.github.com/gazzilion.js/ "Gazzilion.js") or in `examples.html`.
 
 ## Copyright
 2012 © Liel Dulev
@@ -40,6 +40,5 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 
 
