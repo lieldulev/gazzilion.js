@@ -1,0 +1,35 @@
+    body {
+      font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
+      font-size: 14px;
+    }
+    h1,h2{
+      padding-left: 6px;
+    }
+    h3{
+      font-size: 1.5em;
+      margin-bottom:0px;
+      margin-top:6px;
+      background: #efe6e0;
+      padding: 6px;
+      border-radius: 6px;
+    }
+    h4{
+      padding-left: 6px;
+      font-weight: bold;
+      margin: 0;
+    }
+    p{
+      padding-left: 6px;
+    }
+    pre{
+      margin: 12px;
+      padding: 12px;
+      background: #efe6e0;
+    }
+    .method {
+      background: #fff6f0;
+      padding: 12px;
+      border-radius: 12px;
+      margin-top: 12px;
+    }
+
