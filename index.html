@@ -7,7 +7,7 @@
       font-family: Arial, Tahoma, sans-serif;
       font-size: 14px;
     }
-    h1,h2{
+    h3{
       margin-bottom:0px;
       margin-top:6px;
     }
@@ -15,119 +15,128 @@
       margin-top:0px;
       margin-bottom: 6px;
     }
-    table{
-      width: 100%;
-      border-spacing: 0;
-      margin-bottom: 24px;
+    pre{
+      margin: 12px;
+      padding: 12px;
+      background: #efe6e0;
     }
-    th {
-      text-align:left;
-    }
-    tbody tr:nth-child(even) {background: #CCC}
-    tbody tr:nth-child(odd) {background: #EEE}
   </style>
 </head>
 <body>
   <h1>Gazzilion.js</h1>
   <p>
-  Version <span id="gaz_ver"></span>, <a href="https://github.com/lieldulev/gazzilion.js">available on Github</a> under the <a href="http://opensource.org/licenses/mit-license.php">MIT License</a>.
+  Version <span id="gaz_ver"></span>, <a
+    href="https://github.com/lieldulev/gazzilion.js">available on Github</a> under the <a href="http://opensource.org/licenses/mit-license.php">MIT License</a>.
   </p>
+  <h2>What?</h2>
   <p>
   Gazzilion.js tries to solve the common problem of displaying the pretty or textual version for numbers.<br/>
   Since it is in early stages <strong>expect API to break</strong>.
   </p>
   <p>&nbsp;</p>
   <p>
-    <strong>API:</strong><br/>
-    <a href="#add_commas">add_commas</a><br/>
-    <a href="#to_letter">to_letter</a><br/>
-    <a href="#to_word">to_word</a><br/>
+    <strong>Methods:</strong> 
+    <a href="#add_commas">add_commas</a>
+    <a href="#B">B</a>
+    <a href="#billion">billion</a>
+    <a href="#K">K</a>
+    <a href="#M">M</a>
+    <a href="#million">million</a>
+    <a href="#thousand">thousand</a>
+    <a href="#to_letter">to_letter</a>
+    <a href="#to_word">to_word</a>
     </p>
   <p>&nbsp;</p>
-  <h2><a name='add_commas'>Gazzilion.add_commas</a></h2>
+  <h3><a name='add_commas'>Gazzilion.add_commas</a></h3>
   <p> Adds commas where needed.
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Original #
-        </th>
-        <th>
-          Javascript
-        </th>
-        <th>
-          Result
-        </th>
-      </tr>
-    </thead>
-    <tbody id="results_add_commas">
-    </tbody>
-  </table>
-  <h2><a name='to_letter'>Gazzilion.to_letter</a></h2>
+  <pre id="results_add_commas"></pre>
+  <h3><a name='B'>Gazzilion.B(number [, round = 0])</a></h3>
+  <p> Converts to the <em>round</em> short letter form (1B, 1,200B, 1.3B).
+  <pre id="results_B"></pre>
+  <h3><a name='billion'>Gazzilion.billion(number [, round = 0])</a></h3>
+  <p> Converts to the <em>round</em> long word form.
+  <pre id="results_billion"></pre>
+  <h3><a name='K'>Gazzilion.K(number [, round = 0])</a></h3>
+  <p>
+    Converts to the <em>round</em> short letter form (1K, 1,200K, 1.3K). 
+  </p>
+  <pre id="results_K"></pre>
+  <h3><a name='M'>Gazzilion.M(number [, round = 0])</a></h3>
+  <p> Converts to the <em>round</em> short letter form (1M, 1,200M, 1.3M).
+  <pre id="results_M"></pre>
+  <h3><a name='million'>Gazzilion.million(number [, round = 0])</a></h3>
+  <p> Converts to the <em>round</em> long word form.
+  <pre id="results_million"></pre>
+  <h3><a name='thousand'>Gazzilion.thousand(number [, round = 0])</a></h3>
+  <p> Converts to the <em>round</em> long word form.
+  <pre id="results_thousand"></pre>
+  <h3><a name='to_letter'>Gazzilion.to_letter(number [, round = 0])</a></h3>
   <p> Converts to the <em>round</em> short letter form (1K, 1M, 1B).
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Original #
-        </th>
-        <th>
-          Javascript
-        </th>
-        <th>
-          Result
-        </th>
-      </tr>
-    </thead>
-    <tbody id="results_to_letter">
-    </tbody>
-  </table>
-  <h2><a name='to_word'>Gazzilion.to_word</a></h2>
+  <pre id="results_to_letter"></pre>
+  <h3><a name='to_word'>Gazzilion.to_word(number [, round = 0])</a></h3>
   <p> Converts to the <em>round</em> word form (1 thousand, 1 million, 1 billion).
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Original #
-        </th>
-        <th>
-          Javascript
-        </th>
-        <th>
-          Result
-        </th>
-      </tr>
-    </thead>
-    <tbody id="results_to_word">
-    </tbody>
-  </table>
+  <pre id="results_to_word"></pre>
   <script>
     var g_version = document.getElementById('gaz_ver');
     g_version.innerHTML = Gazzilion.VERSION;
-    var numbers = [13.2,102,1373,1024.1234,6751,120499,120500,1000000,2911111,123456789,10900000000,123456789123456];
+    var numbers = [13.2,1024.514,120500,2911111,10900000000];
+    var numbers_big = [120500,2911111,10900000000];
     
     var results = document.getElementById('results_add_commas');
     for(var i=0;i < numbers.length; i++){
-      var row = document.createElement('tr');
       number = numbers[i];
-      row.innerHTML = '<td>'+number+'</td><td><code>Gazzlion.add_commas('+number+')</code></td><td>'+Gazzilion.add_commas(number)+'</td>';
-      results.appendChild(row);
+      results.innerHTML += 'Gazzilion.add_commas('+number+'); // "'+Gazzilion.add_commas(number) + '"' + "\n";
+      results.innerHTML += 'Gazzilion.add_commas('+number+', 2); // "'+Gazzilion.add_commas(number, 2) + '"' + "\n";
+    }
+    
+    var results = document.getElementById('results_K');
+    for(var i=0;i < numbers_big.length; i++){
+      number = numbers_big[i];
+      results.innerHTML += 'Gazzilion.K('+number+'); // "'+Gazzilion.K(number)+ '"' + "\n";
+    }
+    
+    var results = document.getElementById('results_M');
+    for(var i=0;i < numbers_big.length; i++){
+      number = numbers_big[i];
+      results.innerHTML += 'Gazzilion.M('+number+'); // "'+Gazzilion.M(number)+ '"' + "\n";
+    }
+    
+    var results = document.getElementById('results_B');
+    for(var i=0;i < numbers_big.length; i++){
+      number = numbers_big[i];
+      results.innerHTML += 'Gazzilion.B('+number+'); // "'+Gazzilion.B(number)+ '"' + "\n";
+    }
+    
+    var results = document.getElementById('results_thousand');
+    for(var i=0;i < numbers_big.length; i++){
+      number = numbers_big[i];
+      results.innerHTML += 'Gazzilion.thousand('+number+'); // "'+Gazzilion.thousand(number)+ '"' + "\n";
+    }
+    
+    var results = document.getElementById('results_million');
+    for(var i=0;i < numbers_big.length; i++){
+      number = numbers_big[i];
+      results.innerHTML += 'Gazzilion.million('+number+'); // "'+Gazzilion.million(number)+ '"' + "\n";
+    }
+    
+    var results = document.getElementById('results_billion');
+    for(var i=0;i < numbers_big.length; i++){
+      number = numbers_big[i];
+      results.innerHTML += 'Gazzilion.billion('+number+'); // "'+Gazzilion.billion(number)+ '"' + "\n";
     }
     
     var results = document.getElementById('results_to_letter');
     for(var i=0;i < numbers.length; i++){
-      var row = document.createElement('tr');
       number = numbers[i];
-      row.innerHTML = '<td>'+number+'</td><td><code>Gazzlion.to_letter('+number+')</code></td><td>'+Gazzilion.to_letter(number)+'</td>';
-      results.appendChild(row);
+      results.innerHTML += 'Gazzilion.to_letter('+number+'); // "'+Gazzilion.to_letter(number)+ '"' + "\n";
+      results.innerHTML += 'Gazzilion.to_letter('+number+',2); // "'+Gazzilion.to_letter(number,2)+ '"' + "\n";
     }
     
     var results = document.getElementById('results_to_word');
     for(var i=0;i < numbers.length; i++){
-      var row = document.createElement('tr');
       number = numbers[i];
-      row.innerHTML = '<td>'+number+'</td><td><code>Gazzlion.to_word('+number+')</code></td><td>'+Gazzilion.to_word(number)+'</td>';
-      results.appendChild(row);
+      results.innerHTML += 'Gazzilion.to_word('+number+'); // "'+Gazzilion.to_word(number)+ '"' + "\n";
+      results.innerHTML += 'Gazzilion.to_word('+number+',2); // "'+Gazzilion.to_word(number,2)+ '"' + "\n";
     }
   </script>
 </body>
