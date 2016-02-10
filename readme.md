@@ -1,8 +1,6 @@
 # Gazzilion.js
 
-[Gazzilion.js](http://lieldulev.github.com/gazzilion.js/ "Gazzilion.js") tries to solve the common problem of displaying the pretty or textual version for numbers.
-
-**Important**: Since development is in early stages **expect API to break**.
+[Gazzilion.js](http://lieldulev.github.com/gazzilion.js/ "Gazzilion.js") tries to solve the common problem of displaying the pretty or textual version for numbers (`103500` becomes `103.5K`) . You can force to a scale or let the magic methods to format numbers for you.
 
 It takes numbers in javascript like ```21013``` and converts them to human readable strings for display like: 
 
@@ -19,8 +17,7 @@ Old node.js, new node.js and all browsers.
 ## Planned
 
 * Multilingual support
-* Configuration
-* More "complex" formats  - currency, date/time, units (metric/imperial) .
+* Support file size
 
 ## API
 
@@ -32,7 +29,7 @@ Old node.js, new node.js and all browsers.
 Full API is available in [here](http://lieldulev.github.com/gazzilion.js/ "Gazzilion.js").
 
 ## Copyright
-2012 © Liel Dulev
+2012-5 © Liel Dulev
 
 ## MIT License
 
