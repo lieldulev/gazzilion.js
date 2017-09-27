@@ -30,7 +30,7 @@
   }
 
   // Current version.
-  Gazzilion.VERSION = '0.1.3';
+  Gazzilion.VERSION = '0.2.0';
 
   // helper functions
   var divide_and_concat = function(number, devider, round, concat) {
