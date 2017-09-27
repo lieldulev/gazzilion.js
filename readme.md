@@ -14,6 +14,8 @@ It (properly!) extends the built-in Number object - making it easy to use.
 
 Old node.js, new node.js and all browsers.
 
+To install: `npm i gazzilion.js`
+
 ## Planned
 
 * Multilingual support
