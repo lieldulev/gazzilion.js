@@ -29,7 +29,7 @@ Old node.js, new node.js and all browsers.
 Full API is available in [here](http://lieldulev.github.com/gazzilion.js/ "Gazzilion.js").
 
 ## Copyright
-2012-5 © Liel Dulev
+2012-7 © Liel Dulev
 
 ## MIT License
 
